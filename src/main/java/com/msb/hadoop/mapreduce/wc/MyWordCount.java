@@ -1,6 +1,7 @@
 package com.msb.hadoop.mapreduce.wc;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -9,6 +10,8 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
+
+import java.net.URI;
 
 public class MyWordCount {
 
@@ -23,6 +26,7 @@ public class MyWordCount {
 
         Configuration conf = new Configuration(true);
 
+
         GenericOptionsParser parser = new GenericOptionsParser(conf, args);  //工具类帮我们把-D 等等的属性直接set到conf，会留下commandOptions
         String[] othargs = parser.getRemainingArgs();
 
@@ -34,16 +38,11 @@ public class MyWordCount {
 
         Job job = Job.getInstance(conf);
 
-
 //        FileInputFormat.setMinInputSplitSize(job,2222);
 //        job.setInputFormatClass(ooxx.class);
 
 
-
-
-
-
-        job.setJar("C:\\Users\\admin\\IdeaProjects\\msbhadoop\\target\\hadoop-hdfs-1.0-0.1.jar");
+        job.setJar("C:\\code_github\\hadoop265\\target\\msbhadoop-0.1.jar");
         //必须必须写的
         job.setJarByClass(MyWordCount.class);
 
@@ -53,7 +52,12 @@ public class MyWordCount {
         TextInputFormat.addInputPath(job, infile);
 
         Path outfile = new Path(othargs[1]);
-        if (outfile.getFileSystem(conf).exists(outfile)) outfile.getFileSystem(conf).delete(outfile, true);
+
+        FileSystem fs = FileSystem.get(URI.create("hdfs://hdfsnode1:9000/"), conf, "root");
+        if (fs.exists(outfile)) {
+            fs.delete(outfile, true);
+        }
+
         TextOutputFormat.setOutputPath(job, outfile);
 
         job.setMapperClass(MyMapper.class);

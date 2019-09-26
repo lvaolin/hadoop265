@@ -20,6 +20,7 @@ public class MyMapper extends Mapper<Object, Text, Text, IntWritable> {
     //hello hadoop 2
     //TextInputFormat
     //key  是每一行字符串自己第一个字节面向源文件的偏移量
+    @Override
     public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 
 

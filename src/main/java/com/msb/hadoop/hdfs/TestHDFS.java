@@ -53,12 +53,13 @@ public class TestHDFS {
      */
     @Test
     public void mkdir() throws Exception {
-
-        Path dir = new Path("/msb01");
-        if(fs.exists(dir)){
-            fs.delete(dir,true);
-        }
-        fs.mkdirs(dir);
+        Path dirInput = new Path("/bigdata/mapreduce/input");
+        Path dirOutput = new Path("/bigdata/mapreduce/output");
+//        if(fs.exists(dir)){
+//            fs.delete(dir,true);
+//        }
+        fs.mkdirs(dirInput);
+        fs.mkdirs(dirOutput);
 
     }
 
@@ -69,8 +70,8 @@ public class TestHDFS {
     @Test
     public void upload() throws Exception {
 
-        BufferedInputStream input = new BufferedInputStream(new FileInputStream(new File("C:\\Users\\41490\\Desktop\\大数据脑图.png")));
-        Path outfile   = new Path("/msb/大数据脑图.png");
+        BufferedInputStream input = new BufferedInputStream(new FileInputStream(new File("C:\\code_github\\hive\\notes\\01 Hive的基本介绍.md")));
+        Path outfile   = new Path("/bigdata/mapreduce/input/01Hive的基本介绍.md");
         FSDataOutputStream output = fs.create(outfile);
 
         IOUtils.copyBytes(input,output,conf,true);

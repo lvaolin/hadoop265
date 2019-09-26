@@ -6,7 +6,7 @@
 
   <groupId>com.msb.hadoop</groupId>
   <artifactId>msbhadoop</artifactId>
-  <version>1.0-0.1</version>
+  <version>0.1</version>
 
   <name>msbhadoop</name>
 
@@ -28,7 +28,7 @@
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-client</artifactId>
-      <version>2.6.5</version>
+      <version>2.7.7</version>
     </dependency>
 
 
@@ -37,14 +37,14 @@
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-common</artifactId>
-      <version>2.6.5</version>
+      <version>2.7.7</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-hdfs</artifactId>
-      <version>2.6.5</version>
+      <version>2.7.7</version>
     </dependency>
       <dependency>
           <groupId>junit</groupId>
